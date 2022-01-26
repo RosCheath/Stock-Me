@@ -23,7 +23,7 @@
         <div id="page-content">
             <div class="row">
                 <!--start Count Product-->
-                @if(Auth::check() && Auth::user()->role == "Super Admin")
+                @if(Auth::user()->role == "Super Admin")
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="panel">
                             <div class="panel-body">
@@ -62,7 +62,7 @@
                 }<!--end Count Product-->
                 @endif
             <!--start Count Category-->
-                @if(Auth::check() && Auth::user()->role == "Super Admin")
+                @if(Auth::user()->role == "Super Admin")
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="panel">
                             <div class="panel-body">

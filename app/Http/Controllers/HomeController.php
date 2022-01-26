@@ -37,7 +37,7 @@ class HomeController extends Controller
         $employees = Employee::latest()->paginate(5);
         // Count for user
         $data = User::latest()->paginate(5);
-        $productCount = Product::where('id','=',Auth::user()->id)->count();
+        $productCount = Product::where('user_id','=',Auth::user()->id)->count();
         $employeeCount = DB::table('employees')->count();
         $categoryCount = DB::table('categories')->count();
         $allstockCount = DB::table('product_stocks')->count();
@@ -45,7 +45,7 @@ class HomeController extends Controller
         $stockCountOUT = ProductStock::where('status','=','out')->count();
 
         // Count for admin
-                $productAdminCount = DB::table('products')->count();
+        $productAdminCount = DB::table('products')->count();
         $employeeAdminCount = DB::table('employees')->count();
         $categoryAdminCount = DB::table('categories')->count();
         $allstockAdminCount = DB::table('product_stocks')->count();
