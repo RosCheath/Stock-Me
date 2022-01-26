@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
 use App\Models\User;
+use App\Policies\ProductPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+      Product::class => ProductPolicy::class
     ];
 
     /**
@@ -26,8 +28,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('super-admin-feature',function(User $user){
+        Gate::define('super-admin-feature', static function(User $user){
             return $user->role === 'Super Admin';
+        });
+
+        Gate::define('super-admin-user-id', static function(User $user, Product $product){
+            return $user->id === $product->user_id;
         });
     }
 }

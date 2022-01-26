@@ -21,8 +21,27 @@
         <!--Page content-->
         <!--===================================================-->
         <div id="page-content">
-            <!--Widget-4 -->
             <div class="row">
+                <!--start Count Product-->
+                @if(Auth::check() && Auth::user()->role == "Super Admin")
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-9 col-xs-10">
+                                        <h3 class="mar-no"> <span class="counter">{{$productAdminCount}} Products</span></h3>
+                                        <p class="mar-ver-5"> New and Old Product </p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-2"> <i class="fa fa-shopping-cart fa-3x text-info"></i> </div>
+                            </div>
+                            <div class="progress progress-striped progress-sm">
+                                <div style="width: {{$productAdminCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$productAdminCount}}" role="progressbar" class="progress-bar"> <span class="sr-only">60% Complete</span> </div>
+                            </div>
+                            <p> Total Products </p>
+                        </div>
+                    </div>
+                </div>
+                @else{
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="panel">
                         <div class="panel-body">
@@ -40,6 +59,28 @@
                         </div>
                     </div>
                 </div>
+                }<!--end Count Product-->
+                @endif
+            <!--start Count Category-->
+                @if(Auth::check() && Auth::user()->role == "Super Admin")
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-9 col-xs-10">
+                                        <h3 class="mar-no"> <span class="counter">{{$categoryAdminCount}} Category</span></h3>
+                                        <p class="mar-ver-5">New and old Category</p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-2"> <i class="fa fa-list-alt fa-3x text-danger"></i> </div>
+                                </div>
+                                <div class="progress progress-striped progress-sm">
+                                    <div style="width: {{$categoryAdminCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$categoryAdminCount}}" role="progressbar" class="progress-bar progress-bar-danger"> </div>
+                                </div>
+                                <p> Total Category </p>
+                            </div>
+                        </div>
+                    </div>
+                @else{
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="panel">
                         <div class="panel-body">
@@ -57,6 +98,9 @@
                         </div>
                     </div>
                 </div>
+                }<!--end Count Category-->
+                @endif
+
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="panel widget">
                         <div class="panel-body">
@@ -173,7 +217,9 @@
                                 <ul class="nav nav-tabs">
                                     <li class="active"> <a data-toggle="tab" href="#demo-lft-tab-1"> New Product </a> </li>
                                     <li> <a data-toggle="tab" href="#demo-lft-tab-2">New Employee</a> </li>
+                                    @can('super-admin-feature')
                                     <li> <a data-toggle="tab" href="#demo-lft-tab-3">New User</a> </li>
+                                    @endcan
                                 </ul>
                                 <!--Tabs Content-->
                                 <div class="tab-content">
@@ -193,6 +239,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($products as $key => $product)
+                                                @can('view', $product)
                                             <tr>
                                                 <td>{{++$key}}</td>
                                                 <td>{{$product->name}}</td>
@@ -205,6 +252,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                                @endcan
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -249,6 +297,7 @@
                                         <!--===================================================-->
                                         <!-- End Foo Table - Filtering -->
                                     </div>
+                                    @can('super-admin-feature')
                                     <div id="demo-lft-tab-3" class="tab-pane fade">
                                         <!--Hover Rows-->
                                         <!--===================================================-->
@@ -314,6 +363,7 @@
                                         <!--===================================================-->
                                         <!--End Hover Rows-->
                                     </div>
+                                    @endcan
                                 </div>
                             </div>
                             <!--===================================================-->

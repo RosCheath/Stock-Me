@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\History;
 use App\Models\ProductStock;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -13,7 +14,6 @@ class ProductController extends Controller
 {
     public function index()
     {
-
         $products = Product::get();
         return view('products.index',compact('products'));
     }
@@ -64,12 +64,16 @@ class ProductController extends Controller
 
         $product->stock_id = $product_stocks->id;
         $product->save();
+
         Toastr::success('Successfully', 'Create', ["positionClass" => "toast-top-right"]);
         return redirect(route('products.index'));
     }
 
     public function edit(Product $product)
     {
+        if(Auth::user()->cannot('update',$product)){
+            abort(403);
+        }
         $categories = Category::get();
         $product_stocks = ProductStock::get();
         return view('products.edit',compact('product'),
@@ -80,6 +84,9 @@ class ProductController extends Controller
     }
     public function update(Request $request ,Product $product)
     {
+        if(Auth::user()->cannot('update',$product)){
+            abort(403);
+        }
         $request->validate([
             'name' => 'required',
             'unit_price' => 'required',
@@ -101,6 +108,9 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        if(Auth::user()->cannot('delete',$product)){
+            abort(403);
+        }
         $product->delete();
         Toastr::error('Successfully', 'Delete', ["positionClass" => "toast-top-right"]);
         return redirect(route('products.index'));

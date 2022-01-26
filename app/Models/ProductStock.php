@@ -12,7 +12,7 @@ class ProductStock extends Model
     public const STOCK_OUT = 'out';
 
     public $fillable = [
-        'quantity','location','product_id'
+        'quantity','product_id'
     ];
 
     public function product()

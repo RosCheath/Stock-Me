@@ -6,6 +6,7 @@ use App\Models\ProductStock;
 use App\Models\Product;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -34,13 +35,23 @@ class HomeController extends Controller
     {
         $products = Product::latest()->paginate(5);
         $employees = Employee::latest()->paginate(5);
+        // Count for user
         $data = User::latest()->paginate(5);
-        $productCount = DB::table('products')->count();
+        $productCount = Product::where('id','=',Auth::user()->id)->count();
         $employeeCount = DB::table('employees')->count();
         $categoryCount = DB::table('categories')->count();
         $allstockCount = DB::table('product_stocks')->count();
         $stockCountIN = ProductStock::where('status','=','in')->count();
         $stockCountOUT = ProductStock::where('status','=','out')->count();
+
+        // Count for admin
+                $productAdminCount = DB::table('products')->count();
+        $employeeAdminCount = DB::table('employees')->count();
+        $categoryAdminCount = DB::table('categories')->count();
+        $allstockAdminCount = DB::table('product_stocks')->count();
+        $stockAdminCountIN = ProductStock::where('status','=','in')->count();
+        $stockAdminCountOUT = ProductStock::where('status','=','out')->count();
+
         return view('dashboard.dashboard_home',compact(('data'),
             'products',
             'employees',
@@ -49,7 +60,14 @@ class HomeController extends Controller
             'categoryCount',
             'stockCountIN',
             'stockCountOUT',
-            'allstockCount'
+            'allstockCount',
+        // Count Admin
+            'productAdminCount',
+            'employeeAdminCount',
+            'categoryAdminCount',
+            'allstockAdminCount',
+            'stockAdminCountIN',
+            'stockAdminCountOUT'
         ));
     }
 }

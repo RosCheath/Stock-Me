@@ -41,8 +41,10 @@
                             <th>Action</th>
                         </tr>
                         </thead>
+
                         <tbody>
                         @foreach($products as $product)
+                            @can('view', $product)
                         <tr>
                             <td>{{ $product->name }}</td>
                             <td>
@@ -64,10 +66,11 @@
                             <a class="btn btn-xs btn-danger" href="#" onclick="document.getElementById('productDelete{{$product->id}}').submit()"><i class="fa fa-trash"></i></a>
                             </a>
                         </td>
-
                         </tr>
+                            @endcan
                         @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
