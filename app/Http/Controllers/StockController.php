@@ -89,6 +89,9 @@ class StockController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->cannot('update',$id)){
+            abort(403);
+        }
         $product = Product::findOrFail($id);
         $product_stocks = ProductStock::findOrFail($id);
         return view(
@@ -109,6 +112,9 @@ class StockController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Auth::user()->cannot('update',$id)){
+            abort(403);
+        }
         $product_stocks = ProductStock::findOrFail($id);
         $product_stocks->update($request->all());
         return redirect(route('stock.index'));
@@ -122,6 +128,9 @@ class StockController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->cannot('delete',$id)){
+            abort(403);
+        }
         $product_stocks = ProductStock::findOrFail($id);
         $product_stocks->delete();
         return redirect(route('stock.index'));

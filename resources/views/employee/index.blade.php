@@ -26,20 +26,11 @@
                             <div class="col-sm-9">
                                 <a id="demo-dt-addrow-btn" href="{{route('employee.create')}}" class="btn btn-pink">Add New</a>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="form-group nm">
-                                    <select class="form-control" id="source">
-                                        <option value="Name">Full Name</option>
-                                        <option value="position">Position</option>
-                                        <option value="company">Company</option>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="row">
                         @foreach($employee as $employees)
-                            @can('view', $employee)
+                            @can('view', $employees)
                         <div class="col-md-3">
                             <div class="panel panel-default">
                                 <div class="panel-body np">
@@ -54,7 +45,6 @@
                                         <li>
                                             <a href="{{ route('employee.edit', $employees->id) }}" class="clearfix">
                                                 <i class="fa fa-user fa-lg"></i> Edit profile
-                                                <span class="label label-success label-circle pull-right">13</span>
                                             </a>
                                         </li>
                                         <li>
@@ -66,12 +56,12 @@
                                                 </i> Delete</a>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="clearfix">
-                                                <i class="fa fa-envelope fa-lg"></i> New message
-                                                <span class="label label-primary label-circle pull-right">44</span>
-                                            </a>
-                                        </li>
+{{--                                        <li>--}}
+{{--                                            <a href="javascript:void(0)" class="clearfix">--}}
+{{--                                                <i class="fa fa-envelope fa-lg"></i> New message--}}
+{{--                                                <span class="label label-primary label-circle pull-right">44</span>--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
                                     </ul>
                                 </div>
                             </div>

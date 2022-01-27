@@ -10,16 +10,6 @@ class EmployeePolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
 
     /**
      * Determine whether the user can view the model.
@@ -33,16 +23,6 @@ class EmployeePolicy
         return $user->role === 'Super Admin' || $user->id ===$employee->user_id;
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(User $user)
-    {
-        //
-    }
 
     /**
      * Determine whether the user can update the model.
@@ -53,7 +33,7 @@ class EmployeePolicy
      */
     public function update(User $user, Employee $employee)
     {
-        //
+        return $user->role === 'Super Admin' || $user->id ===$employee->user_id;
     }
 
     /**
@@ -65,30 +45,7 @@ class EmployeePolicy
      */
     public function delete(User $user, Employee $employee)
     {
-        //
+        return $user->role === 'Super Admin' || $user->id ===$employee->user_id;
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Employee $employee)
-    {
-        //
-    }
 }

@@ -58,7 +58,11 @@
                                             <select class="form-control selectpicker" data-live-search="true" id="product_id" name="product_id">
                                                 @foreach($product as $product)
                                                     @can('view', $product)
-                                                <option value="{{ $product->id }}">{{ $product->name }} ({{$product->stock->quantity}}) </option>
+                                                <option value="{{ $product->id }}">{{ $product->name }} ({{$product->stock->quantity}})
+                                                    @if(Auth::user()->role == 'Super Admin' )
+                                                    ({{$product->user->name}})
+                                                    @endif
+                                                </option>
                                                     @endcan
                                                 @endforeach
                                             </select>

@@ -33,7 +33,9 @@
                         <tr>
                             <th>Name</th>
                             <th>Image</th>
+                            @can('super-admin-feature')
                             <th>Created By</th>
+                            @endcan
                             <th>Category</th>
                             <th>Quantity</th>
                             <th>Year</th>
@@ -52,7 +54,11 @@
                                 <img width="30px" height="30px" src="{{ '/image/'.$product->image }}">
                             </td>
                             @can('super-admin-feature')
-                            <td>{{$product->user->name}}</td>
+                                @if(Auth::user()->id == $product->user_id )
+                                    <td>{{$product->user->name}} (You)</td>
+                                @else
+                                    <td>{{$product->user->name}}</td>
+                                @endif
                             @endcan
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->stock->quantity }}</td>

@@ -46,6 +46,7 @@ class HomeController extends Controller
         $stockCountOUT = ProductStock::where('user_id','=',Auth::user()->id)->where('status','=','out')->count();
 
         // Count for admin
+        $userAdminCount = DB::table('users')->count();
         $productAdminCount = DB::table('products')->count();
         $employeeAdminCount = DB::table('employees')->count();
         $categoryAdminCount = DB::table('categories')->count();
@@ -69,7 +70,8 @@ class HomeController extends Controller
             'categoryAdminCount',
             'allstockAdminCount',
             'stockAdminCountIN',
-            'stockAdminCountOUT'
+            'stockAdminCountOUT',
+            'userAdminCount'
         ));
     }
 }

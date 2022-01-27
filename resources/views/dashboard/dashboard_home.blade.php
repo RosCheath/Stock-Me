@@ -145,15 +145,15 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-9 col-sm-9 col-xs-10">
-                                    <h3 class="mar-no"> <span class="counter">{{$allstockAdminCount}} History </span></h3>
-                                    <p class="mar-ver-5"> In and Out Stock</p>
+                                    <h3 class="mar-no"> <span class="counter">{{$userAdminCount}} User </span></h3>
+                                    <p class="mar-ver-5"> Total User</p>
                                 </div>
-                                <div class="col-md-3 col-sm-3 col-xs-2"><i class="fa fa-cubes fa-3x text-info"></i> </div>
+                                <div class="col-md-3 col-sm-3 col-xs-2"><i class="fa fa-user fa-3x text-info"></i> </div>
                             </div>
                             <div class="progress progress-striped progress-sm">
-                                <div style="width: {{$allstockAdminCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$allstockAdminCount}}" role="progressbar" class="progress-bar progress-bar-warning"> </div>
+                                <div style="width: {{$userAdminCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$userAdminCount}}" role="progressbar" class="progress-bar progress-bar-warning"> </div>
                             </div>
-                            <p> Total Traffic Stock </p>
+                            <p> Total User Created </p>
                         </div>
                     </div>
                 </div>
@@ -282,19 +282,17 @@
                                         <table class="table table-hover table-vcenter">
                                             <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Name</th>
                                                 <th>Product Date</th>
                                                 <th>Year</th>
                                                 <th class="hidden-xs">Quantity</th>
-                                                <th class="hidden-xs">Progress Full 100</th>
+                                                <th class="hidden-xs">Quantity Full 100</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($products as $key => $product)
                                                 @can('view', $product)
                                             <tr>
-                                                <td>{{++$key}}</td>
                                                 <td>{{$product->name}}</td>
                                                 <td>{{$product->created_at->format('d-m-y')}}</td>
                                                 <td>{{$product->year}}</td>

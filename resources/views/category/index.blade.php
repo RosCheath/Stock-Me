@@ -33,17 +33,27 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            @can('super-admin-feature')
+                            <th>Created By</th>
+                            @endcan
                             <th>Date</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($category as $category)
+                            @can('view', $category)
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
                                 <td>{{ $category->name }}</td>
+                                @can('super-admin-feature')
+                                    @if(Auth::user()->id == $category->user_id )
+                                        <td>{{$category->user->name}} (You)</td>
+                                    @else
+                                    <td>{{$category->user->name}}</td>
+                                    @endif
+                                @endcan
                                 <td>{{ $category->created_at }}</td>
-
                                 <td>
                                     <a class="btn btn-xs btn-primary" href="{{ route('category.edit', $category->id) }}"><i class="fa fa-edit"></i>
                                         <br>
@@ -56,6 +66,7 @@
                                 </td>
 
                             </tr>
+                            @endcan
                         @endforeach
                         </tbody>
                     </table>
