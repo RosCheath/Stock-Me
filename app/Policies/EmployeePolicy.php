@@ -30,7 +30,7 @@ class EmployeePolicy
      */
     public function view(User $user, Employee $employee)
     {
-        //
+        return $user->role === 'Super Admin' || $user->id ===$employee->user_id;
     }
 
     /**

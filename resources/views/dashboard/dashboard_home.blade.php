@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                @else{
+                @else
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="panel">
                         <div class="panel-body">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                }<!--end Count Product-->
+                <!--end Count Product-->
                 @endif
             <!--start Count Category-->
                 @if(Auth::user()->role == "Super Admin")
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                @else{
+                @else
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="panel">
                         <div class="panel-body">
@@ -98,43 +98,84 @@
                         </div>
                     </div>
                 </div>
-                }<!--end Count Category-->
+                <!--end Count Category-->
                 @endif
-
+            <!--start Count Employees-->
+                @if(Auth::user()->role == "Super Admin")
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="panel widget">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-9 col-sm-9 col-xs-10">
-                                    <h3 class="mar-no"> <span class="counter">{{$employeeCount}} Employees</span></h3>
+                                    <h3 class="mar-no"> <span class="counter">{{$employeeAdminCount}} Employees</span></h3>
                                     <p class="mar-ver-5"> New and old Employee </p>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-2"> <i class="fa fa-users fa-3x text-success"></i> </div>
                             </div>
                             <div class="progress progress-striped progress-sm">
-                                <div style="width: {{$employeeCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$employeeCount}}" role="progressbar" class="progress-bar progress-bar-success"> <span class="sr-only">60% Complete</span> </div>
+                                <div style="width: {{$employeeAdminCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$employeeAdminCount}}" role="progressbar" class="progress-bar progress-bar-success"> <span class="sr-only">60% Complete</span> </div>
                             </div>
                             <p> Total Employee </p>
                         </div>
                     </div>
                 </div>
+                @else
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="panel widget">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-9 col-xs-10">
+                                        <h3 class="mar-no"> <span class="counter">{{$employeeCount}} Employees</span></h3>
+                                        <p class="mar-ver-5"> New and old Employee </p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-2"> <i class="fa fa-users fa-3x text-success"></i> </div>
+                                </div>
+                                <div class="progress progress-striped progress-sm">
+                                    <div style="width: {{$employeeCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$employeeCount}}" role="progressbar" class="progress-bar progress-bar-success"> <span class="sr-only">60% Complete</span> </div>
+                                </div>
+                                <p> Total Employee </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            <!--start Count History-->
+                @if(Auth::user()->role == "Super Admin")
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="panel widget">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-9 col-sm-9 col-xs-10">
-                                    <h3 class="mar-no"> <span class="counter">{{$allstockCount}} History </span></h3>
+                                    <h3 class="mar-no"> <span class="counter">{{$allstockAdminCount}} History </span></h3>
                                     <p class="mar-ver-5"> In and Out Stock</p>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-2"><i class="fa fa-cubes fa-3x text-info"></i> </div>
                             </div>
                             <div class="progress progress-striped progress-sm">
-                                <div style="width: {{$allstockCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$allstockCount}}" role="progressbar" class="progress-bar progress-bar-warning"> </div>
+                                <div style="width: {{$allstockAdminCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$allstockAdminCount}}" role="progressbar" class="progress-bar progress-bar-warning"> </div>
                             </div>
                             <p> Total Traffic Stock </p>
                         </div>
                     </div>
                 </div>
+                @else
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="panel widget">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-9 col-xs-10">
+                                        <h3 class="mar-no"> <span class="counter">{{$allstockCount}} History </span></h3>
+                                        <p class="mar-ver-5"> In and Out Stock</p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-2"><i class="fa fa-cubes fa-3x text-info"></i> </div>
+                                </div>
+                                <div class="progress progress-striped progress-sm">
+                                    <div style="width: {{$allstockCount}}%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{$allstockCount}}" role="progressbar" class="progress-bar progress-bar-warning"> </div>
+                                </div>
+                                <p> Total Traffic Stock </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
             <div class="row">
                 <div class="col-md-9">
@@ -151,11 +192,21 @@
                                         /*** Change type "column" to "bar", "area", "line" or "pie"***/
                                         type: "column",
                                         dataPoints: [
-                                            { label: "Products", y: {{$productCount}} },
-                                            { label: "Employee", y: {{$employeeCount}} },
-                                            { label: "Category", y: {{$categoryCount}} },
-                                            { label: "IN Stock", y: {{$stockCountIN}} },
-                                            { label: "OUT Stock", y: {{$stockCountOUT}} },
+                                            @if(Auth::user()->role == "Super Admin")
+                                            { label: "Products", y: {{$productAdminCount}} },
+                                            { label: "Employee", y: {{$employeeAdminCount}} },
+                                            { label: "Category", y: {{$categoryAdminCount}} },
+                                            { label: "IN Stock", y: {{$stockAdminCountIN}} },
+                                            { label: "OUT Stock", y: {{$stockAdminCountOUT}} },
+
+                                                @else
+                                                { label: "Products", y: {{$productCount}} },
+                                                { label: "Employee", y: {{$employeeCount}} },
+                                                { label: "Category", y: {{$categoryCount}} },
+                                                { label: "IN Stock", y: {{$stockCountIN}} },
+                                                { label: "OUT Stock", y: {{$stockCountOUT}} },
+                                    @endif
+
                                         ]
                                     }
                                 ]
@@ -180,11 +231,19 @@
                                 Morris.Donut({
                                     element: 'graph-chart',
                                     data: [
+                                            @if(Auth::user()->role == "Super Admin")
+                                        {value: {{$productAdminCount}}, label: 'Product'},
+                                        {value: {{$employeeAdminCount}}, label: 'Employee'},
+                                        {value: {{$categoryAdminCount}}, label: 'Category'},
+                                        {value: {{$stockAdminCountIN}}, label: 'IN Stock'},
+                                        {value: {{$stockAdminCountOUT}}, label: 'OUT Stock'}
+                                        @else
                                         {value: {{$productCount}}, label: 'Product'},
                                         {value: {{$employeeCount}}, label: 'Employee'},
                                         {value: {{$categoryCount}}, label: 'Category'},
                                         {value: {{$stockCountIN}}, label: 'IN Stock'},
                                         {value: {{$stockCountOUT}}, label: 'OUT Stock'}
+                                        @endif
                                     ],
                                     colors: ['#E9422E', '#FAC552', '#3eb489', '#29b7d3', '#8a42f5'],
                                     resize:true,
@@ -197,12 +256,6 @@
                     </div>
                 </div>
             </div>
-{{--            <div class="row">--}}
-{{--                <div class="col-md-8">--}}
-
-
-{{--                </div>--}}
-{{--            </div>--}}
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel">
@@ -275,6 +328,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($employees as $employee)
+                                                @can('view', $employee)
                                             <tr>
                                                 <td>{{$employee->name}}</td>
                                                 <td class="hidden-xs">{{$employee->position}}</td>
@@ -282,6 +336,7 @@
                                                 <td class="hidden-xs">{{$employee->phone}}</td>
                                                 <td class="hidden-xs">{{$employee->dob}}</td>
                                             </tr>
+                                                @endcan
                                            @endforeach
                                             </tbody>
                                             <tfoot>

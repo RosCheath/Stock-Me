@@ -33,6 +33,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Image</th>
+                            <th>Created By</th>
                             <th>Category</th>
                             <th>Quantity</th>
                             <th>Year</th>
@@ -50,6 +51,9 @@
                             <td>
                                 <img width="30px" height="30px" src="{{ '/image/'.$product->image }}">
                             </td>
+                            @can('super-admin-feature')
+                            <td>{{$product->user->name}}</td>
+                            @endcan
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->stock->quantity }}</td>
                             <td>{{ $product->year }}</td>

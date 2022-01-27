@@ -2,8 +2,20 @@
 
 return [
     'categories' => [
-        'Water', 'Drink', 'Coffee',
+        [
+            'name' => 'Water',
+            'user_id' => '1'
+        ],
+        [
+        'name' => 'Drink',
+        'user_id' => '1'
+        ],
+        [
+            'name' => 'Coffee',
+            'user_id' => '1'
+        ]
     ],
+
     'roles' =>[
         'Super Admin', 'Admin','User'
     ],

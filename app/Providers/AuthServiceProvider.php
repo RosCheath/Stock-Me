@@ -2,9 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\Employee;
 use App\Models\Product;
+use App\Models\ProductStock;
 use App\Models\User;
+use App\Policies\CategoryPolicy;
+use App\Policies\EmployeePolicy;
 use App\Policies\ProductPolicy;
+use App\Policies\StockPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,7 +22,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-      Product::class => ProductPolicy::class
+      Product::class => ProductPolicy::class,
+        ProductStock::class => StockPolicy::class,
+        Employee::class => EmployeePolicy::class,
+        Category::class => CategoryPolicy::class
     ];
 
     /**

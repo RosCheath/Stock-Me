@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -39,7 +40,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
+        $input = $request->all();
+        $input['user_id']=Auth::id();
+        Category::create($input);
         Toastr::success('Successfully', 'Add category', ["positionClass" => "toast-top-right"]);
         return redirect()->route('category.index');
     }

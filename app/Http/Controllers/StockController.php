@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductStock;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
@@ -46,6 +47,7 @@ class StockController extends Controller
     {
             if ($request['quantity'] && $request['quantity'] > 0) {
                 $new_item = new ProductStock();
+                $new_item -> user_id = Auth::id();
                 $new_item->product_id = $request->product_id;
                 $new_item->status = $request->status_type;
                 $new_item->quantity = $request['quantity'];

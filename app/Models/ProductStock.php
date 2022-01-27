@@ -12,12 +12,16 @@ class ProductStock extends Model
     public const STOCK_OUT = 'out';
 
     public $fillable = [
-        'quantity','product_id'
+        'quantity','product_id','user_id'
     ];
 
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
 

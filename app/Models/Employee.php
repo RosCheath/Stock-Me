@@ -10,10 +10,11 @@ class Employee extends Model
     use HasFactory;
 
     public $fillable = [
-        'name','email','position','image','phone','dob'
+        'name','email','position','image','phone','dob','user_id'
     ];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
+
 }

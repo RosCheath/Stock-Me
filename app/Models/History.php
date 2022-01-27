@@ -9,7 +9,7 @@ class History extends Model
 {
     use HasFactory;
     public $fillable = [
-       'product_id','category_id'
+       'product_id','category_id','user_id'
     ];
 
     public function category_history()
@@ -20,5 +20,9 @@ class History extends Model
     public function product_history()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

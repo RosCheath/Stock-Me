@@ -40,6 +40,7 @@
                         <tbody>
                         @if ($stock)
                             @foreach ($stock as $key => $stock)
+                                @can('view', $stock)
                                 <tr>
                                     <td>{{$stock->product->name ?? ''}}</td>
                                     <td>{{$stock->product->category->name ?? ''}}</td>
@@ -48,6 +49,7 @@
                                     <td>{{$stock->created_at->format('d-m-y') ?? ''}}</td>
                                     <td>{{$stock->product->created_at->format('H:i:s')  ?? ''}}</td>
                                 </tr>
+                                @endcan
                             @endforeach
                         @endif
                         </tbody>

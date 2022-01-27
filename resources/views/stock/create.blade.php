@@ -57,7 +57,9 @@
                                             <!--===================================================-->
                                             <select class="form-control selectpicker" data-live-search="true" id="product_id" name="product_id">
                                                 @foreach($product as $product)
+                                                    @can('view', $product)
                                                 <option value="{{ $product->id }}">{{ $product->name }} ({{$product->stock->quantity}}) </option>
+                                                    @endcan
                                                 @endforeach
                                             </select>
                                             <!--===================================================-->
@@ -111,10 +113,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--Panel body-->
-{{--                                    <div class="panel-body">--}}
-{{--                                        <p>Lorem ipsum dolor sit amet.</p>--}}
-{{--                                    </div>--}}
                                 </div>
                         </div>
                     </div>

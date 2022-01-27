@@ -21,6 +21,7 @@ class CreateEmployeesTable extends Migration
             $table->string('phone');
             $table->string('image')->nullable();
             $table->string('dob');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

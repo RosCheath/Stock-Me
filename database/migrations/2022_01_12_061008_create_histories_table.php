@@ -18,6 +18,7 @@ class CreateHistoriesTable extends Migration
             $table->string('name', 50);
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('user_id');
             $table->float('quanity');
             $table->string('photo')->nullable();
             $table->integer('unit_price');

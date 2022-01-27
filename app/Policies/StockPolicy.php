@@ -30,7 +30,7 @@ class StockPolicy
      */
     public function view(User $user, ProductStock $productStock)
     {
-        //
+        return $user->role === 'Super Admin' || $user->id ===$productStock->user_id;
     }
 
     /**

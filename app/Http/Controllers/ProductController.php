@@ -33,6 +33,7 @@ class ProductController extends Controller
             'name' => 'required',
             'unit_price' => 'required',
             'selling_price' => 'required',
+            'category_id' => 'required',
             'location' => 'required',
             'year' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -59,6 +60,7 @@ class ProductController extends Controller
 
         $product_stocks = new ProductStock();
         $product_stocks->product_id = $product->id;
+        $product_stocks -> user_id = Auth::id();
         $product_stocks->quantity = $request->quantity;
         $product_stocks->save();
 

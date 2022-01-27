@@ -20,6 +20,7 @@ class CategoriesSeeder extends Seeder
             if (empty($category)) {
                 $category = new Category();
                 $category->name = $name;
+                $category->user_id = 1;
                 $category->save();
             }
         }

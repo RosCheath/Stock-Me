@@ -39,6 +39,7 @@
                     </div>
                     <div class="row">
                         @foreach($employee as $employees)
+                            @can('view', $employee)
                         <div class="col-md-3">
                             <div class="panel panel-default">
                                 <div class="panel-body np">
@@ -75,6 +76,7 @@
                                 </div>
                             </div>
                         </div>
+                            @endcan
                         @endforeach
                     </div>
                 </div>

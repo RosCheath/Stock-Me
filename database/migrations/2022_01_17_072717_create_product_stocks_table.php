@@ -18,6 +18,7 @@ class CreateProductStocksTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->integer('quantity')->nullable();
             $table->string('status',10)->default(\App\Models\ProductStock::STOCK_IN);
+            $table->unsignedBigInteger('user_id');
             $table->foreign('product_id')->references('id')
                 ->on('products')->onDelete('cascade');
 
