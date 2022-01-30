@@ -39,18 +39,13 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
-        $input = $request->image;
-        if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $productImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $productImage);
-            $input = $productImage;
-        }
+        $image = $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('public/productImage',$image);
         $product = new Product();
         $product->fill($request->all());
         $product -> user_id = Auth::id();
         $product -> name = $request->name;
-        $product -> image = $input;
+        $product -> image = $image;
         $product -> category_id = $request->category_id;
         $product -> unit_price = $request->unit_price;
         $product -> selling_price = $request->selling_price;

@@ -51,7 +51,7 @@
                         <tr>
                             <td>{{ $product->name }}</td>
                             <td>
-                                <img width="30px" height="30px" src="{{ '/image/'.$product->image }}">
+                                <img width="30px" height="30px" src="{{ url('storage/productImage/'. $product->image) }}">
                             </td>
                             @can('super-admin-feature')
                                 @if(Auth::user()->id == $product->user_id )
